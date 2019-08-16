@@ -20,14 +20,28 @@
 
 package uniol.apt.relabelling;
 
+import java.util.Arrays;
+
 public class UnsolvableGenerator {
+	static final String[] generators = {
+		"lincomb", "quadcomb", "staticcomb", "overlappingcycles",
+		"tree", "twig", "lrtree", "cycpath", "cycpath2", "knobcomb",
+		"2cycles", "size3cycles", "grid", "2waycomb", "twig2", "alter",
+		"gridb", "gridb2", "abring", "abword", "2dimcyc",
+	};
 
 	public static void main(String[] args) {
 		if (args.length != 2) {
 			System.err.println("Arguments: (1) Class of unsolvable LTS, (2) Size of the LTS");
+			printGenerators();
 			return;
 		}
 		int size = -1;
+		if (!Arrays.asList(generators).contains(args[0])) {
+			System.err.println("Unknown class of unsolvable LTS '" + args[0] + "'");
+			printGenerators();
+			return;
+		}
 		try {
 			size = Integer.parseInt(args[1]);
 		} catch (NumberFormatException e) {
@@ -59,6 +73,14 @@ public class UnsolvableGenerator {
 			case "abring": abring(size); break;
 			case "abword": abword(size); break;
 			case "2dimcyc": cyccopy(size); break;
+			default: throw new RuntimeException("This code should be unreachable");
+		}
+	}
+
+	static void printGenerators() {
+		System.err.println("Available generators:");
+		for (String generator : generators) {
+			System.err.println("  " + generator);
 		}
 	}
 

@@ -31,6 +31,12 @@ example, we generate a linear comb of size 2 and save it in a file
 $ java -jar apt-unsolvable-generator.jar lincomb 2 > lincomb-2.apt
 ```
 
+To get a list of supported classes, you invoke the code without arguments:
+
+```
+$ java -jar apt-unsolvable-generator.jar
+```
+
 Relabelling LTS
 ---------------
 
